@@ -9,7 +9,7 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 SHEETS_ID = "1fmLHEJT9U20LPKLS-Med9cu2NJxhmjfD4gb-nOJwW9M"
 SERVE_DIR = os.path.dirname(os.path.abspath(__file__))
-PORT      = 8765
+PORT      = int(os.environ.get("PORT", 8765))
 INTERVAL  = 30  # 秒
 
 # アカウント設定: app_id → (gid, イベントIDプレフィックス)
