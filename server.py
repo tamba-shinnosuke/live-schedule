@@ -42,8 +42,24 @@ ALLOWED_MEMBERS = {
     "緒環", "松田", "川上", "野沢", "陶",
 }
 
-CACHE = {"data": None, "updated_at": 0}
-LOCK  = threading.Lock()
+CACHE      = {"data": None, "updated_at": 0}
+LIVE       = {"isLive": False, "url": "", "title": "", "account": ""}
+LOCK       = threading.Lock()
+DEALS_FILE = os.path.join(SERVE_DIR, "deals.json")
+
+def load_deals():
+    try:
+        with open(DEALS_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            return data if isinstance(data, list) else []
+    except:
+        return []
+
+def save_deals(data):
+    with open(DEALS_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+DEALS = load_deals()
 
 
 def get_member(name, members_pool):
@@ -181,16 +197,54 @@ class Handler(SimpleHTTPRequestHandler):
         super().__init__(*args, directory=SERVE_DIR, **kwargs)
 
     def do_POST(self):
+        length = int(self.headers.get("Content-Length", 0))
+        body   = json.loads(self.rfile.read(length).decode("utf-8"))
+
         if self.path == "/api/verify-pin":
-            length = int(self.headers.get("Content-Length", 0))
-            body   = json.loads(self.rfile.read(length).decode("utf-8"))
-            ok     = body.get("pin") == ADMIN_PIN
-            self._json({"ok": ok})
+            self._json({"ok": body.get("pin") == ADMIN_PIN})
+
+        elif self.path == "/api/live-status":
+            if body.get("pin") != ADMIN_PIN:
+                self._json({"error": "unauthorized"}, 401); return
+            LIVE["isLive"]  = body.get("isLive", False)
+            LIVE["url"]     = body.get("url", "")
+            LIVE["title"]   = body.get("title", "")
+            LIVE["account"] = body.get("account", "")
+            self._json({"ok": True})
+
+        elif self.path == "/api/deals":
+            if body.get("pin") != ADMIN_PIN:
+                self._json({"error": "unauthorized"}, 401); return
+            action = body.get("action", "add")
+            if action == "add":
+                import time as _time
+                DEALS.append({"id": str(int(_time.time()*1000)),
+                               "account": body.get("account",""),
+                               "title":   body.get("title",""),
+                               "content": body.get("content","")})
+            elif action == "update":
+                did = body.get("id","")
+                for d in DEALS:
+                    if d["id"] == did:
+                        d["account"] = body.get("account", d.get("account",""))
+                        d["title"]   = body.get("title",   d.get("title",""))
+                        d["content"] = body.get("content", d.get("content",""))
+                        break
+            elif action == "delete":
+                did = body.get("id","")
+                DEALS[:] = [d for d in DEALS if d["id"] != did]
+            save_deals(DEALS)
+            self._json({"ok": True})
+
         else:
             self.send_response(404); self.end_headers()
 
     def do_GET(self):
-        if self.path in ("/admin", "/admin/"):
+        if self.path == "/api/live-status":
+            self._json(dict(LIVE))
+        elif self.path == "/api/deals":
+            self._json(DEALS)
+        elif self.path in ("/admin", "/admin/"):
             self.path = "/index.html"
             super().do_GET()
         elif self.path == "/api/schedule":

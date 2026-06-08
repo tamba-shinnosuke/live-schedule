@@ -22,6 +22,7 @@
       min-height: 100vh;
       gap: 40px;
       padding: 40px 20px;
+      position: relative;
     }
 
     #top-page h1 { font-size: 28px; font-weight: 700; letter-spacing: 0.04em; }
@@ -592,6 +593,211 @@
       border-bottom: 1px solid #222;
     }
 
+    /* ===== お得情報ボタン ===== */
+    #deals-fab {
+      position: absolute; top: 20px; right: 20px;
+      background: linear-gradient(135deg, #fe2c55 0%, #ff4d00 50%, #f59e0b 100%);
+      border: none; border-radius: 20px;
+      padding: 16px 18px; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      box-shadow: 0 0 40px rgba(254,44,85,0.5), 0 8px 32px rgba(0,0,0,0.4);
+      animation: dealsFabPulse 2s ease-in-out infinite;
+      transition: transform 0.15s;
+      overflow: hidden; min-width: 90px;
+    }
+
+    #deals-fab::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.12) 50%, transparent 100%);
+      animation: dealsShimmer 2.5s ease-in-out infinite;
+    }
+
+    @keyframes dealsShimmer {
+      0%   { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    #deals-fab:hover { transform: scale(1.02); }
+    #deals-fab:active { transform: scale(0.98); }
+
+    @keyframes dealsFabPulse {
+      0%,100% { box-shadow: 0 0 40px rgba(254,44,85,0.5), 0 8px 32px rgba(0,0,0,0.4); }
+      50%      { box-shadow: 0 0 60px rgba(254,44,85,0.8), 0 8px 40px rgba(0,0,0,0.5); }
+    }
+
+    .deals-fab-emoji { font-size: 34px; line-height: 1; }
+    .deals-fab-label {
+      font-size: 13px; font-weight: 900; color: #fff;
+      letter-spacing: 0.02em; line-height: 1;
+    }
+    .deals-fab-sub {
+      font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.75);
+      text-align: center;
+    }
+
+    .deals-fab-badge {
+      position: absolute; top: -8px; right: -8px;
+      background: #25f4ee; color: #000;
+      font-size: 12px; font-weight: 900;
+      min-width: 22px; height: 22px; border-radius: 11px;
+      padding: 0 6px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ===== お得情報ページ ===== */
+    #deals-page {
+      display: none; flex-direction: column;
+      position: fixed; inset: 0;
+      background: #000; z-index: 10;
+    }
+
+    .deals-page-header {
+      background: #111; border-bottom: 1px solid #222;
+      padding: 14px 18px; height: 68px;
+      display: flex; align-items: center; gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .deals-page-header h2 { flex: 1; font-size: 17px; font-weight: 800; color: #fff; }
+
+    .deals-page-body {
+      flex: 1; overflow-y: auto; padding: 20px;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+
+    .deal-card {
+      background: #111; border: 1px solid #2a2a2a;
+      border-radius: 16px; padding: 18px;
+      position: relative;
+    }
+
+    .deal-card-title {
+      font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 8px;
+    }
+
+    .deal-card-content {
+      font-size: 14px; color: #aaa; line-height: 1.7; white-space: pre-wrap;
+    }
+
+    .deal-card-actions {
+      position: absolute; top: 12px; right: 12px;
+      display: none; gap: 6px;
+    }
+
+    .deal-card-edit {
+      background: none; border: 1px solid #333; color: #888;
+      font-size: 11px; padding: 3px 8px; border-radius: 6px;
+      cursor: pointer; transition: all 0.15s;
+    }
+
+    .deal-card-edit:hover { border-color: #f59e0b; color: #f59e0b; }
+
+    .deal-card-delete {
+      background: none; border: none; color: #333;
+      font-size: 18px; cursor: pointer;
+      transition: color 0.15s; line-height: 1;
+    }
+
+    .deal-card-delete:hover { color: #fe2c55; }
+
+    .deals-empty-state {
+      text-align: center; padding: 60px 20px; color: #333;
+      font-size: 14px;
+    }
+
+    /* お得情報追加モーダル */
+    #deals-modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.8); z-index: 300;
+      align-items: flex-end; justify-content: center;
+    }
+
+    #deals-modal-overlay.open { display: flex; }
+
+    .deals-modal {
+      background: #111; border: 1px solid #2a2a2a;
+      border-radius: 24px 24px 0 0; padding: 24px;
+      width: 100%; max-width: 600px;
+      padding-bottom: calc(24px + env(safe-area-inset-bottom));
+    }
+
+    .deals-modal h2 { font-size: 17px; font-weight: 700; margin-bottom: 18px; color: #fff; }
+
+    .deals-account-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;
+    }
+
+    .deals-account-btn {
+      display: flex; align-items: center; gap: 10px;
+      background: #1a1a1a; border: 2px solid #2a2a2a;
+      border-radius: 12px; padding: 10px 12px;
+      cursor: pointer; transition: all 0.15s; width: 100%;
+    }
+
+    .deals-account-btn:hover   { border-color: #555; }
+    .deals-account-btn.selected { border-color: #fe2c55; background: #1f0a10; }
+
+    .deals-account-btn img {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1px solid #fff; object-fit: cover; flex-shrink: 0;
+    }
+
+    .deals-account-btn span {
+      font-size: 12px; font-weight: 700; color: #fff;
+      text-align: left; overflow: hidden;
+      text-overflow: ellipsis; white-space: nowrap;
+    }
+
+    .deal-card-account {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+    }
+
+    .deal-card-account img {
+      width: 24px; height: 24px; border-radius: 50%;
+      border: 1px solid #333; object-fit: cover;
+    }
+
+    .deal-card-account span {
+      font-size: 11px; color: #666; font-weight: 600;
+    }
+
+    /* ===== GO LIVE BUTTON ===== */
+    #go-live-btn {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      z-index: 400;
+      display: none; align-items: center; gap: 8px;
+      padding: 13px 28px; border-radius: 40px; border: none;
+      font-size: 15px; font-weight: 800; letter-spacing: 0.06em;
+      cursor: pointer; transition: all 0.2s ease;
+      background: #2a2a2a; color: #555;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    #go-live-btn.visible { display: flex; }
+
+    #go-live-btn.live {
+      background: #fe2c55; color: #fff;
+      box-shadow: 0 0 24px rgba(254,44,85,0.6), 0 4px 20px rgba(0,0,0,0.4);
+      animation: livePulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes livePulse {
+      0%,100% { box-shadow: 0 0 24px rgba(254,44,85,0.6), 0 4px 20px rgba(0,0,0,0.4); }
+      50%      { box-shadow: 0 0 40px rgba(254,44,85,0.9), 0 4px 20px rgba(0,0,0,0.4); }
+    }
+
+    #go-live-btn .live-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #fff; flex-shrink: 0;
+      animation: dotBlink 1s infinite;
+    }
+
+    @keyframes dotBlink {
+      0%,100% { opacity: 1; } 50% { opacity: 0.3; }
+    }
+
+
     /* ===== PIN MODAL ===== */
     #pin-overlay {
       display: none; position: fixed; inset: 0;
@@ -678,6 +884,10 @@
 </head>
 <body>
 
+<!-- GO LIVE BUTTON -->
+<button id="go-live-btn" onclick="onGoLiveClick()">GO LIVE</button>
+
+
 <!-- PIN MODAL -->
 <div id="pin-overlay">
   <div class="pin-box">
@@ -702,6 +912,46 @@
 <div id="top-page">
   <h1><span>ライブ配信</span> スケジュール</h1>
   <div class="account-grid" id="account-grid"></div>
+
+  <!-- お得情報ボタン -->
+  <button id="deals-fab" onclick="showDealsPage()">
+    <span class="deals-fab-emoji">🔥</span>
+    <span class="deals-fab-label">お得情報</span>
+    <span class="deals-fab-sub">TAP!</span>
+  </button>
+</div>
+
+<!-- お得情報ページ -->
+<div id="deals-page">
+  <div class="deals-page-header">
+    <button class="back-btn" onclick="hideDealsPage()">←</button>
+    <h2>🏷 お得情報</h2>
+    <button class="add-btn admin-only" onclick="openDealsModal()">+ 追加</button>
+  </div>
+  <div class="deals-page-body" id="deals-list"></div>
+</div>
+
+<!-- お得情報追加モーダル -->
+<div id="deals-modal-overlay">
+  <div class="deals-modal">
+    <h2 id="deals-modal-title">🏷 お得情報を追加</h2>
+    <div class="form-group">
+      <label>アカウント</label>
+      <div class="deals-account-grid" id="deals-account-grid"></div>
+    </div>
+    <div class="form-group">
+      <label>タイトル</label>
+      <input type="text" id="deals-title-input" placeholder="例: 今週のセール情報">
+    </div>
+    <div class="form-group">
+      <label>内容</label>
+      <textarea id="deals-content-input" style="height:120px" placeholder="セール情報・クーポンコードなどを入力"></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeDealsModal()">キャンセル</button>
+      <button class="btn-save" onclick="saveDeals()">保存</button>
+    </div>
+  </div>
 </div>
 
 <!-- SCHEDULE PAGE -->
@@ -936,11 +1186,13 @@
 
     currentWeekStart = getWeekStart(new Date());
     switchTab('schedule');
+    updateGoLiveBtn();
   }
 
   function goBack() {
     document.getElementById('schedule-page').style.display = 'none';
     document.getElementById('top-page').style.display = 'flex';
+    document.getElementById('go-live-btn').classList.remove('visible', 'live');
   }
 
   // ===== TABS =====
@@ -955,7 +1207,7 @@
       document.getElementById('schedule-view').style.display = 'flex';
       document.getElementById('streamer-view').style.display = 'none';
       addBtn.textContent = '+ 追加';
-      addBtn.style.display = '';
+      addBtn.style.display = isAdminMode ? '' : 'none';
       addBtn.onclick = () => openEventModal();
       renderTimeline();
       scrollToCurrentTime();
@@ -1470,6 +1722,7 @@
       const data = await res.json();
       if (data.ok) {
         sessionStorage.setItem('adminAuth', '1');
+        sessionStorage.setItem('adminPin', pin);
         document.getElementById('pin-overlay').classList.remove('open');
         setAdminMode(true);
       } else {
@@ -1565,6 +1818,196 @@
   // 初回 + 30秒ごとに同期
   syncFromServer();
   setInterval(syncFromServer, 30000);
+
+  // ===== GO LIVE (スケジュール自動検知) =====
+
+  // 現在時刻がスケジュールの配信時間内か判定
+  function getCurrentLiveEvent(accountId) {
+    if (!accountId) return null;
+    const now = new Date();
+    const todayStr = dateToStr(now);
+    const nowMin = now.getHours() * 60 + now.getMinutes();
+    return (scheduleData[accountId] || []).find(ev => {
+      if (ev.date !== todayStr) return false;
+      const [sh, sm] = ev.start.split(':').map(Number);
+      const [eh, em] = ev.end.split(':').map(Number);
+      return nowMin >= sh * 60 + sm && nowMin < eh * 60 + em;
+    }) || null;
+  }
+
+  function updateGoLiveBtn() {
+    const btn = document.getElementById('go-live-btn');
+    if (!currentAccount) { btn.classList.remove('visible'); return; }
+
+    btn.classList.add('visible');
+    const liveEvent = getCurrentLiveEvent(currentAccount.id);
+    if (liveEvent) {
+      btn.classList.add('live');
+      btn.innerHTML = '<div class="live-dot"></div> LIVE';
+      btn.style.color = '#fff';
+    } else {
+      btn.classList.remove('live');
+      btn.innerHTML = 'VIEW ACCOUNT';
+      btn.style.color = '#f59e0b';
+    }
+  }
+
+  function onGoLiveClick() {
+    if (!currentAccount) return;
+    const liveEvent = getCurrentLiveEvent(currentAccount.id);
+    if (liveEvent) {
+      // 配信時間中 → TikTokライブへ
+      window.open(`${currentAccount.url}/live`, '_blank');
+    } else {
+      // 配信時間外 → TikTokアカウントページへ
+      window.open(currentAccount.url, '_blank');
+    }
+  }
+
+  // 1分ごとにライブ状態を更新
+  setInterval(updateGoLiveBtn, 60000);
+
+  // ===== お得情報 =====
+  let dealsData = [];
+
+  function renderDealsPage() {
+    const list = document.getElementById('deals-list');
+    if (!dealsData.length) {
+      list.innerHTML = '<div class="deals-empty-state">現在お得情報はありません</div>';
+      return;
+    }
+    list.innerHTML = dealsData.map(d => {
+      const acc = ACCOUNTS.find(a => a.id === d.account);
+      return `
+      <div class="deal-card">
+        <div class="deal-card-actions admin-only">
+          <button class="deal-card-edit" onclick="openEditDealModal('${d.id}')">編集</button>
+          <button class="deal-card-delete" onclick="deleteDeal('${d.id}')">✕</button>
+        </div>
+        ${acc ? `<div class="deal-card-account">
+          <img src="${acc.img}" alt="${acc.name}">
+          <span>${acc.name}</span>
+        </div>` : ''}
+        <div class="deal-card-title">${escHtml(d.title)}</div>
+        <div class="deal-card-content">${escHtml(d.content)}</div>
+      </div>`;
+    }).join('');
+    if (isAdminMode) {
+      document.querySelectorAll('.deal-card-actions').forEach(el => el.style.display = 'flex');
+    }
+  }
+
+  function updateDealsBadge() {}
+
+  async function fetchDeals() {
+    try {
+      const res = await fetch('/api/deals', {cache: 'no-store'});
+      dealsData = await res.json();
+      updateDealsBadge();
+    } catch {}
+  }
+
+  function showDealsPage() {
+    document.getElementById('top-page').style.display   = 'none';
+    document.getElementById('deals-page').style.display = 'flex';
+    renderDealsPage();
+  }
+
+  function hideDealsPage() {
+    document.getElementById('deals-page').style.display = 'none';
+    document.getElementById('top-page').style.display   = 'flex';
+  }
+
+  let selectedDealAccount = null;
+  let editingDealId = null;
+
+  function renderDealsAccountGrid() {
+    document.getElementById('deals-account-grid').innerHTML = ACCOUNTS.map(a => `
+      <button class="deals-account-btn${selectedDealAccount === a.id ? ' selected' : ''}"
+              onclick="selectDealAccount('${a.id}')">
+        <img src="${a.img}" alt="${a.name}">
+        <span>${a.name}</span>
+      </button>
+    `).join('');
+  }
+
+  function selectDealAccount(id) {
+    selectedDealAccount = id;
+    renderDealsAccountGrid();
+  }
+
+  function openDealsModal() {
+    editingDealId = null;
+    selectedDealAccount = null;
+    document.getElementById('deals-modal-title').textContent = '🏷 お得情報を追加';
+    document.getElementById('deals-title-input').value   = '';
+    document.getElementById('deals-content-input').value = '';
+    renderDealsAccountGrid();
+    document.getElementById('deals-modal-overlay').classList.add('open');
+  }
+
+  function openEditDealModal(id) {
+    const deal = dealsData.find(d => d.id === id);
+    if (!deal) return;
+    editingDealId = id;
+    selectedDealAccount = deal.account || null;
+    document.getElementById('deals-modal-title').textContent = '🏷 お得情報を編集';
+    document.getElementById('deals-title-input').value   = deal.title   || '';
+    document.getElementById('deals-content-input').value = deal.content || '';
+    renderDealsAccountGrid();
+    document.getElementById('deals-modal-overlay').classList.add('open');
+  }
+
+  function closeDealsModal() {
+    document.getElementById('deals-modal-overlay').classList.remove('open');
+  }
+
+  async function saveDeals() {
+    const pin     = sessionStorage.getItem('adminPin') || '';
+    const title   = document.getElementById('deals-title-input').value.trim();
+    const content = document.getElementById('deals-content-input').value.trim();
+    if (!selectedDealAccount) { alert('アカウントを選択してください'); return; }
+    if (!title) { alert('タイトルを入力してください'); return; }
+    const account = selectedDealAccount;
+    const action  = editingDealId ? 'update' : 'add';
+    const body2   = {pin, action, title, content, account};
+    if (editingDealId) body2.id = editingDealId;
+    try {
+      const res = await fetch('/api/deals', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(body2)
+      });
+      const data = await res.json();
+      if (data.ok) {
+        await fetchDeals();
+        renderDealsPage();
+        closeDealsModal();
+      } else { alert('認証エラー'); }
+    } catch { alert('保存に失敗しました'); }
+  }
+
+  async function deleteDeal(id) {
+    if (!confirm('この情報を削除しますか？')) return;
+    const pin = sessionStorage.getItem('adminPin') || '';
+    try {
+      const res = await fetch('/api/deals', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({pin, action: 'delete', id})
+      });
+      const data = await res.json();
+      if (data.ok) { await fetchDeals(); renderDealsPage(); }
+    } catch {}
+  }
+
+  document.getElementById('deals-modal-overlay').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeDealsModal();
+  });
+
+  // 初回ロード
+  fetchDeals();
+  setInterval(fetchDeals, 60000);
 
   init();
 </script>
