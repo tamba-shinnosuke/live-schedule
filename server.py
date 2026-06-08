@@ -7,10 +7,11 @@ Google Sheets の3アカウント分を30秒ごとに取得して Web アプリ�
 import csv, io, json, os, re, sys, time, threading, urllib.request
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
-SHEETS_ID = "1fmLHEJT9U20LPKLS-Med9cu2NJxhmjfD4gb-nOJwW9M"
-SERVE_DIR = os.path.dirname(os.path.abspath(__file__))
-PORT      = int(os.environ.get("PORT", 8765))
-INTERVAL  = 30  # 秒
+SHEETS_ID  = "1fmLHEJT9U20LPKLS-Med9cu2NJxhmjfD4gb-nOJwW9M"
+SERVE_DIR  = os.path.dirname(os.path.abspath(__file__))
+PORT       = int(os.environ.get("PORT", 8765))
+INTERVAL   = 30  # 秒
+ADMIN_PIN  = os.environ.get("ADMIN_PIN", "Tori@12345@")
 
 # アカウント設定: app_id → (gid, イベントIDプレフィックス)
 ACCOUNTS = {
@@ -179,8 +180,20 @@ class Handler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=SERVE_DIR, **kwargs)
 
+    def do_POST(self):
+        if self.path == "/api/verify-pin":
+            length = int(self.headers.get("Content-Length", 0))
+            body   = json.loads(self.rfile.read(length).decode("utf-8"))
+            ok     = body.get("pin") == ADMIN_PIN
+            self._json({"ok": ok})
+        else:
+            self.send_response(404); self.end_headers()
+
     def do_GET(self):
-        if self.path == "/api/schedule":
+        if self.path in ("/admin", "/admin/"):
+            self.path = "/index.html"
+            super().do_GET()
+        elif self.path == "/api/schedule":
             with LOCK:
                 data = CACHE["data"]
                 ts   = CACHE["updated_at"]

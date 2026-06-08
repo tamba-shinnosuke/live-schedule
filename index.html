@@ -592,6 +592,63 @@
       border-bottom: 1px solid #222;
     }
 
+    /* ===== PIN MODAL ===== */
+    #pin-overlay {
+      display: none; position: fixed; inset: 0;
+      background: #000; z-index: 500;
+      align-items: center; justify-content: center;
+    }
+
+    #pin-overlay.open { display: flex; }
+
+    .pin-box {
+      background: #111; border: 1px solid #2a2a2a;
+      border-radius: 24px; padding: 36px 28px;
+      width: 100%; max-width: 360px; margin: 20px;
+      display: flex; flex-direction: column; align-items: center; gap: 20px;
+      text-align: center;
+    }
+
+    .pin-logo {
+      font-size: 36px; font-weight: 900; letter-spacing: -1px;
+    }
+
+    .pin-logo span:first-child { color: #fe2c55; }
+    .pin-logo span:last-child  { color: #25f4ee; }
+
+    .pin-title {
+      font-size: 16px; font-weight: 700; color: #fff;
+    }
+
+    .pin-subtitle { font-size: 12px; color: #555; }
+
+    #pin-input {
+      width: 100%; background: #0a0a0a;
+      border: 1px solid #2a2a2a; border-radius: 12px;
+      color: #fff; padding: 12px 16px; font-size: 18px;
+      outline: none; text-align: center; letter-spacing: 0.1em;
+      transition: border-color 0.15s;
+    }
+
+    #pin-input:focus { border-color: #fe2c55; }
+    #pin-input.error { border-color: #fe2c55; animation: shake 0.3s; }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25%      { transform: translateX(-6px); }
+      75%      { transform: translateX(6px); }
+    }
+
+    .pin-btn {
+      width: 100%; background: #fe2c55; border: none; color: #fff;
+      padding: 13px; border-radius: 12px;
+      font-size: 15px; font-weight: 700; cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .pin-btn:hover { background: #e0253c; }
+    .pin-error { font-size: 12px; color: #fe2c55; min-height: 16px; }
+
     /* Sync indicator */
     #sync-badge {
       display: none;
@@ -621,6 +678,20 @@
 </head>
 <body>
 
+<!-- PIN MODAL -->
+<div id="pin-overlay">
+  <div class="pin-box">
+    <div class="pin-logo"><span>Tik</span><span>Tok</span></div>
+    <div>
+      <div class="pin-title">管理画面</div>
+      <div class="pin-subtitle">PINコードを入力してください</div>
+    </div>
+    <input type="password" id="pin-input" placeholder="PIN" autocomplete="off">
+    <div class="pin-error" id="pin-error"></div>
+    <button class="pin-btn" onclick="verifyPin()">ログイン</button>
+  </div>
+</div>
+
 <!-- SYNC BADGE -->
 <div id="sync-badge">
   <div class="sync-dot" id="sync-dot"></div>
@@ -641,12 +712,12 @@
       <div class="avatar-sm" id="header-avatar"></div>
       <div class="account-name" id="header-name"></div>
     </div>
-    <button class="add-btn" id="header-add-btn">+ 追加</button>
+    <button class="add-btn admin-only" id="header-add-btn">+ 追加</button>
   </div>
 
   <div class="tabs">
     <button class="tab-btn active" id="tab-schedule" onclick="switchTab('schedule')">📅 スケジュール</button>
-    <button class="tab-btn" id="tab-streamer" onclick="switchTab('streamer')">👤 メンバー管理</button>
+    <button class="tab-btn admin-only" id="tab-streamer" onclick="switchTab('streamer')">👤 メンバー管理</button>
   </div>
 
   <!-- Schedule tab -->
@@ -838,6 +909,7 @@
 
   // ===== INIT =====
   function init() {
+    initMode();
     deduplicateMembersIfNeeded();
     importToriScheduleIfNeeded();
     document.getElementById('account-grid').innerHTML = ACCOUNTS.map(a => `
@@ -1055,7 +1127,7 @@
 
     return `<div class="event-block"
       style="top:${top}px;height:${height}px;background:${bg};color:${fg}"
-      onclick="openEventModal('${ev.id}')">
+      onclick="if(isAdminMode) openEventModal('${ev.id}')">
       ${compact
         ? `<div class="event-title" style="font-size:9px">${escHtml(ev.title)}</div>`
         : `<div class="event-time-label">${ev.start}〜${ev.end}</div>
@@ -1371,6 +1443,63 @@
 
   document.getElementById('event-modal-overlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeEventModal(); });
   document.getElementById('streamer-modal-overlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeStreamerModal(); });
+
+  // ===== モード管理 (管理 / 表示) =====
+  const IS_ADMIN_PATH = window.location.pathname.startsWith('/admin');
+  let isAdminMode = false;
+
+  function setAdminMode(enabled) {
+    isAdminMode = enabled;
+    // 管理専用UI の表示切り替え
+    document.querySelectorAll('.admin-only').forEach(el => {
+      el.style.display = enabled ? '' : 'none';
+    });
+  }
+
+  async function verifyPin() {
+    const pin = document.getElementById('pin-input').value;
+    const errEl = document.getElementById('pin-error');
+    const input = document.getElementById('pin-input');
+    errEl.textContent = '';
+    try {
+      const res = await fetch('/api/verify-pin', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({pin})
+      });
+      const data = await res.json();
+      if (data.ok) {
+        sessionStorage.setItem('adminAuth', '1');
+        document.getElementById('pin-overlay').classList.remove('open');
+        setAdminMode(true);
+      } else {
+        input.classList.add('error');
+        errEl.textContent = 'PINコードが違います';
+        setTimeout(() => input.classList.remove('error'), 400);
+      }
+    } catch {
+      errEl.textContent = 'サーバーに接続できません';
+    }
+  }
+
+  // Enterキーで送信
+  document.getElementById('pin-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') verifyPin();
+  });
+
+  function initMode() {
+    if (IS_ADMIN_PATH) {
+      if (sessionStorage.getItem('adminAuth') === '1') {
+        setAdminMode(true);
+      } else {
+        document.getElementById('pin-overlay').classList.add('open');
+        setAdminMode(false);
+      }
+    } else {
+      // 表示画面: 管理機能を非表示
+      setAdminMode(false);
+    }
+  }
 
   // ===== サーバー同期 =====
   const SYNC_API   = 'http://localhost:8765/api/schedule';
