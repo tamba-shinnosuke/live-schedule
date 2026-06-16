@@ -9,8 +9,8 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #000;
-      color: #fff;
+      background: #ffffff;
+      color: #111111;
     }
 
     /* ===== TOP PAGE ===== */
@@ -18,72 +18,90 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       min-height: 100vh;
-      gap: 40px;
-      padding: 40px 20px;
+      gap: 24px;
+      padding: 24px 20px 40px;
       position: relative;
     }
 
-    #top-page h1 { font-size: 28px; font-weight: 700; letter-spacing: 0.04em; }
-    #top-page h1 span { color: #fe2c55; }
+
+    .top-title {
+      font-size: 20px; font-weight: 900; letter-spacing: 0.02em;
+      color: #111111; text-align: center;
+      width: 100%; max-width: 600px;
+    }
 
     .account-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      gap: 14px;
       width: 100%;
       max-width: 600px;
     }
 
-    .account-card { display: flex; flex-direction: column; gap: 8px; }
-
-    .account-btn {
-      background: #111;
-      border: 1px solid #2a2a2a;
-      border-radius: 16px;
-      padding: 20px 12px;
+    /* アカウントカード（2x2グリッド） */
+    .account-intro-card {
+      background: #f8f8f8;
+      border: 1px solid #d8d8d8;
+      border-radius: 20px;
+      padding: 20px 14px;
       cursor: pointer;
       transition: all 0.2s ease;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       text-align: center;
-      width: 100%;
+      position: relative;
     }
 
-    .account-btn:hover {
-      border-color: #fe2c55;
-      box-shadow: 0 0 16px rgba(254,44,85,0.3);
+    .account-intro-card:hover {
+      border-color: #FF6B00;
+      box-shadow: 0 0 20px rgba(255,107,0,0.25);
       transform: translateY(-2px);
     }
 
-    .account-btn .avatar {
-      width: 56px; height: 56px;
+    .account-intro-avatar {
+      width: 70px; height: 70px;
       border-radius: 50%; overflow: hidden;
-      border: 1px solid #fff;
+      border: 2px solid #fff;
     }
 
-    .account-btn .avatar img { width: 100%; height: 100%; object-fit: cover; }
-    .account-btn .name { font-size: 14px; font-weight: 600; color: #fff; }
-    .account-btn .handle { font-size: 12px; color: #666; }
+    .account-intro-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
-    .tiktok-link {
-      display: block; text-align: center;
-      font-size: 12px; color: #25f4ee; text-decoration: none;
-      padding: 6px; border-radius: 10px;
-      background: #111; border: 1px solid #25f4ee;
-      transition: all 0.15s;
+    .account-intro-name {
+      font-size: 13px; font-weight: 800; color: #111111; line-height: 1.3;
     }
 
-    .tiktok-link:hover { background: #0a2a2a; }
+    .account-intro-handle { font-size: 10px; color: #777777; }
+
+    .account-intro-text {
+      font-size: 11px; color: #888; line-height: 1.5;
+      white-space: pre-wrap; text-align: left; width: 100%;
+    }
+
+    .account-intro-tiktok {
+      font-size: 11px; color: #FF6B00; text-decoration: none;
+      border: 1px solid #FF6B00; border-radius: 8px;
+      padding: 4px 10px; transition: all 0.15s; white-space: nowrap;
+    }
+
+    .account-intro-tiktok:hover { background: #fff5ee; }
+
+    .account-intro-edit {
+      position: absolute; top: 8px; right: 8px;
+      background: none; border: 1px solid #d8d8d8; color: #777777;
+      font-size: 10px; padding: 2px 6px; border-radius: 5px;
+      cursor: pointer; display: none; transition: all 0.15s;
+    }
+
+    .account-intro-edit:hover { border-color: #FF6B00; color: #FF6B00; }
 
     /* ===== SCHEDULE PAGE ===== */
     #schedule-page {
       display: none; flex-direction: column;
       position: fixed; inset: 0;
-      background: #000; z-index: 10;
+      background: #ffffff; z-index: 10;
     }
 
     #schedule-view {
@@ -92,19 +110,19 @@
     }
 
     .schedule-header {
-      background: #111; border-bottom: 1px solid #222;
+      background: #f8f8f8; border-bottom: 1px solid #e8e8e8;
       padding: 14px 18px;
       display: flex; align-items: center; gap: 10px;
       flex-shrink: 0; height: 68px;
     }
 
     .back-btn {
-      background: none; border: none; color: #666; cursor: pointer;
+      background: none; border: none; color: #888888; cursor: pointer;
       font-size: 22px; padding: 4px 8px; border-radius: 8px;
       transition: color 0.15s; flex-shrink: 0;
     }
 
-    .back-btn:hover { color: #fff; }
+    .back-btn:hover { color: #111111; }
 
     .account-info { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
 
@@ -122,147 +140,169 @@
     }
 
     .add-btn {
-      background: #fe2c55; border: none; color: #fff;
+      background: #FF6B00; border: none; color: #fff;
       padding: 8px 14px; border-radius: 20px;
       font-size: 13px; font-weight: 600; cursor: pointer;
       transition: background 0.15s; flex-shrink: 0;
     }
 
-    .add-btn:hover { background: #e0253c; }
+    .add-btn:hover { background: #e05800; }
 
     /* Tabs */
     .tabs {
-      display: flex; background: #111; border-bottom: 1px solid #222;
+      display: flex; background: #f8f8f8; border-bottom: 1px solid #e8e8e8;
       flex-shrink: 0;
     }
 
     .tab-btn {
       flex: 1; background: none; border: none;
       border-bottom: 2px solid transparent;
-      color: #555; padding: 11px 0;
+      color: #777777; padding: 11px 0;
       font-size: 13px; font-weight: 600; cursor: pointer;
       transition: all 0.15s;
     }
 
-    .tab-btn.active { color: #fe2c55; border-bottom-color: #fe2c55; }
+    .tab-btn.active { color: #FF6B00; border-bottom-color: #FF6B00; }
 
     /* Week nav */
     .week-nav {
       display: flex; align-items: center; justify-content: center;
       gap: 16px; padding: 12px 24px;
-      background: #111; border-bottom: 1px solid #222;
+      background: #f8f8f8; border-bottom: 1px solid #e8e8e8;
       flex-shrink: 0;
     }
 
     .week-nav-btn {
-      background: #222; border: none; color: #fff;
+      background: #e4e4e4; border: none; color: #111111;
       width: 30px; height: 30px; border-radius: 50%;
       cursor: pointer; font-size: 16px;
       display: flex; align-items: center; justify-content: center;
       transition: background 0.15s;
     }
 
-    .week-nav-btn:hover { background: #333; }
+    .week-nav-btn:hover { background: #d4d4d4; }
 
-    .week-label { font-size: 13px; font-weight: 600; min-width: 170px; text-align: center; color: #fff; }
+    .week-label { font-size: 13px; font-weight: 600; min-width: 170px; text-align: center; color: #111111; }
 
     /* ===== TIMELINE ===== */
-    .timeline-container { flex: 1; overflow: auto; min-height: 0; }
+    .timeline-container {
+      flex: 1; display: flex; overflow: hidden; min-height: 0;
+    }
+
+    /* 固定時間軸（左列） */
+    .time-axis {
+      flex-shrink: 0; width: 56px;
+      display: flex; flex-direction: column;
+      border-right: 2px solid #e0e0e0;
+      background: #f8f8f8; z-index: 50;
+    }
+
+    .time-axis-header {
+      flex-shrink: 0; height: 68px;
+      border-bottom: 2px solid #e8e8e8;
+      background: #f8f8f8;
+    }
+
+    .time-axis-body {
+      flex: 1; overflow: hidden;
+    }
+
+    /* スクロールエリア（右側） */
+    .timeline-scroll {
+      flex: 1; overflow-x: auto; overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
 
     /* Day headers */
     .day-headers {
-      display: grid; grid-template-columns: 56px repeat(7, 1fr);
-      min-width: 760px;
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      min-width: 700px;
       position: sticky; top: 0;
-      background: #111; border-bottom: 2px solid #222; z-index: 50;
+      background: #f8f8f8; border-bottom: 2px solid #e8e8e8; z-index: 50;
     }
 
-    .day-header-empty {
-      border-right: 1px solid #222;
-      background: #111;
-    }
+    .day-header-empty { display: none; }
 
     .day-header {
       padding: 8px 4px; text-align: center;
-      border-right: 1px solid #222;
+      border-right: 1px solid #e8e8e8;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center; gap: 4px;
-      background: #111;
+      background: #f8f8f8;
     }
 
-    .day-header.today { background: #1a1200; }
-    .day-header.sat   { background: #001a1a; }
-    .day-header.sun   { background: #1a0008; }
+    .day-header.today { background: #fff8f0; }
+    .day-header.sat   { background: #f0f8ff; }
+    .day-header.sun   { background: #fff0f0; }
 
     .day-header .day-name {
       font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: #444;
+      text-transform: uppercase; color: #999999;
     }
 
-    .day-header.today .day-name { color: #f59e0b; }
+    .day-header.today .day-name { color: #FF6B00; }
     .day-header.sat .day-name   { color: #25f4ee; }
-    .day-header.sun .day-name   { color: #fe2c55; }
+    .day-header.sun .day-name   { color: #FF6B00; }
 
     /* 全日付を同じサイズの円枠で統一 */
     .day-header .day-num {
       width: 34px; height: 34px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 17px; font-weight: 800; color: #555;
+      font-size: 17px; font-weight: 800; color: #777777;
     }
 
     .day-header.sat .day-num   { color: #25f4ee; }
-    .day-header.sun .day-num   { color: #fe2c55; }
-    .day-header.today .day-num { background: #f59e0b; color: #000; }
+    .day-header.sun .day-num   { color: #FF6B00; }
+    .day-header.today .day-num { background: #FF6B00; color: #000; }
 
     /* Time grid */
     .time-slots {
-      display: grid; grid-template-columns: 56px repeat(7, 1fr);
-      min-width: 760px; position: relative;
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      min-width: 700px; position: relative;
     }
 
-    .time-col { display: flex; flex-direction: column; }
+    .time-col { display: none; }
 
     .time-label {
       height: 80px;
       display: flex; align-items: flex-start; justify-content: center;
       padding-top: 6px;
-      font-size: 11px; font-weight: 700; color: #333;
-      border-right: 1px solid #1a1a1a;
-      border-bottom: 1px solid #1a1a1a;
+      font-size: 11px; font-weight: 700; color: #aaaaaa;
+      border-bottom: 1px solid #eeeeee;
       letter-spacing: 0.03em;
-      background: #0a0a0a;
+      background: #f8f8f8;
     }
 
-    .time-label.major { color: #555; font-size: 12px; }
+    .time-label.major { color: #777777; font-size: 12px; }
 
-    .day-col { position: relative; border-right: 1px solid #1a1a1a; background: #0a0a0a; overflow: hidden; }
-    .day-col.today-col { background: #0d0a00; }
-    .day-col.sat-col   { background: #00100f; }
-    .day-col.sun-col   { background: #100004; }
+    .day-col { position: relative; border-right: 1px solid #eeeeee; background: #f2f2f2; overflow: hidden; }
+    .day-col.today-col { background: #fffcf8; }
+    .day-col.sat-col   { background: #f0f8ff; }
+    .day-col.sun-col   { background: #fff8f8; }
 
     .hour-cell {
       height: 80px;
-      border-bottom: 1px solid #1a1a1a;
+      border-bottom: 1px solid #eeeeee;
     }
 
-    .hour-cell.major { border-bottom-color: #2a2a2a; }
+    .hour-cell.major { border-bottom-color: #d8d8d8; }
 
     .hour-cell::after {
       content: ''; display: block; height: 50%;
-      border-bottom: 1px dashed #161616;
+      border-bottom: 1px dashed #eeeeee;
     }
 
     /* Current time indicator */
     .now-line {
       position: absolute; left: 0; right: 0; height: 2px;
-      background: #f59e0b; z-index: 30; pointer-events: none;
+      background: #FF6B00; z-index: 30; pointer-events: none;
     }
 
     .now-line::before {
       content: ''; position: absolute;
       left: -4px; top: -4px;
       width: 10px; height: 10px;
-      background: #f59e0b; border-radius: 50%;
+      background: #FF6B00; border-radius: 50%;
     }
 
     /* ===== EVENT BLOCKS ===== */
@@ -273,9 +313,9 @@
       cursor: pointer; z-index: 10; overflow: hidden;
       transition: filter 0.15s, box-shadow 0.15s, z-index 0s;
       display: flex; flex-direction: column; gap: 2px;
-      background: #1a1a1a !important; color: #fff !important;
-      border-left: 3px solid #fe2c55;
-      box-shadow: 0 1px 6px rgba(254,44,85,0.2);
+      background: #ebebeb !important; color: #111111 !important;
+      border-left: 3px solid #FF6B00;
+      box-shadow: 0 1px 6px rgba(255,107,0,0.2);
     }
 
     .event-block:hover {
@@ -333,13 +373,13 @@
     }
 
     .streamer-card {
-      background: #111; border: 1px solid #2a2a2a; border-radius: 16px;
+      background: #f8f8f8; border: 1px solid #d8d8d8; border-radius: 16px;
       padding: 18px 10px;
       display: flex; flex-direction: column; align-items: center; gap: 10px;
       cursor: pointer; transition: border-color 0.15s;
     }
 
-    .streamer-card:hover { border-color: #fe2c55; }
+    .streamer-card:hover { border-color: #FF6B00; }
 
     .streamer-icon {
       width: 58px; height: 58px; border-radius: 50%;
@@ -348,20 +388,20 @@
     }
 
     .streamer-icon img { width: 100%; height: 100%; object-fit: cover; }
-    .streamer-card .streamer-name { font-size: 12px; font-weight: 600; text-align: center; color: #fff; }
+    .streamer-card .streamer-name { font-size: 12px; font-weight: 600; text-align: center; color: #111111; }
 
     .streamer-add-card {
-      border: 2px dashed #2a2a2a; border-radius: 16px; padding: 18px 10px;
+      border: 2px dashed #d8d8d8; border-radius: 16px; padding: 18px 10px;
       display: flex; flex-direction: column; align-items: center; gap: 10px;
-      cursor: pointer; transition: border-color 0.15s; color: #444;
+      cursor: pointer; transition: border-color 0.15s; color: #999999;
     }
 
-    .streamer-add-card:hover { border-color: #fe2c55; color: #fe2c55; }
+    .streamer-add-card:hover { border-color: #FF6B00; color: #FF6B00; }
 
     .streamer-add-icon {
       width: 58px; height: 58px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 26px; background: #1a1a1a;
+      font-size: 26px; background: #ebebeb;
     }
 
     /* ===== MODALS ===== */
@@ -374,17 +414,17 @@
     .modal-overlay.open { display: flex; }
 
     .modal {
-      background: #111; border: 1px solid #2a2a2a; border-radius: 20px;
+      background: #f8f8f8; border: 1px solid #d8d8d8; border-radius: 20px;
       padding: 22px; width: 100%; max-width: 430px; margin: 16px;
       max-height: 92vh; overflow-y: auto;
     }
 
-    .modal h2 { font-size: 17px; font-weight: 700; margin-bottom: 18px; color: #fff; }
+    .modal h2 { font-size: 17px; font-weight: 700; margin-bottom: 18px; color: #111111; }
 
     .form-group { margin-bottom: 13px; }
 
     .form-group label {
-      display: block; font-size: 11px; color: #555;
+      display: block; font-size: 11px; color: #777777;
       margin-bottom: 5px; font-weight: 600;
       letter-spacing: 0.06em; text-transform: uppercase;
     }
@@ -392,16 +432,16 @@
     .form-group input,
     .form-group select,
     .form-group textarea {
-      width: 100%; background: #0a0a0a;
-      border: 1px solid #2a2a2a; border-radius: 10px;
-      color: #fff; padding: 9px 12px; font-size: 14px;
+      width: 100%; background: #f2f2f2;
+      border: 1px solid #d8d8d8; border-radius: 10px;
+      color: #111111; padding: 9px 12px; font-size: 14px;
       outline: none; transition: border-color 0.15s;
       font-family: inherit;
     }
 
     .form-group input:focus,
     .form-group select:focus,
-    .form-group textarea:focus { border-color: #fe2c55; }
+    .form-group textarea:focus { border-color: #FF6B00; }
 
     .form-group textarea { height: 70px; resize: none; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -426,18 +466,18 @@
       border: 2px solid transparent; transition: border-color 0.15s;
     }
 
-    .streamer-chip.selected .streamer-chip-icon { border-color: #fff; }
+    .streamer-chip.selected .streamer-chip-icon { border-color: #111111; }
     .streamer-chip-icon img { width: 100%; height: 100%; object-fit: cover; }
 
     .streamer-chip-name {
-      font-size: 10px; color: #555; text-align: center;
+      font-size: 10px; color: #777777; text-align: center;
       max-width: 46px; overflow: hidden;
       text-overflow: ellipsis; white-space: nowrap;
     }
 
-    .streamer-chip.selected .streamer-chip-name { color: #fff; }
+    .streamer-chip.selected .streamer-chip-name { color: #111111; }
 
-    .no-streamers-hint { font-size: 12px; color: #444; padding: 6px 0; }
+    .no-streamers-hint { font-size: 12px; color: #999999; padding: 6px 0; }
 
     /* Color picker */
     .color-picker { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -448,51 +488,51 @@
       transition: border-color 0.15s;
     }
 
-    .color-option.selected { border-color: #fff; }
+    .color-option.selected { border-color: #111111; }
 
     /* Modal actions */
     .modal-actions { display: flex; gap: 8px; margin-top: 18px; }
 
     .btn-cancel {
-      flex: 1; background: #222; border: none; color: #888;
+      flex: 1; background: #e4e4e4; border: none; color: #888;
       padding: 11px; border-radius: 12px;
       font-size: 14px; font-weight: 600; cursor: pointer;
       transition: background 0.15s;
     }
 
-    .btn-cancel:hover { background: #333; }
+    .btn-cancel:hover { background: #d4d4d4; }
 
     .btn-save {
-      flex: 2; background: #fe2c55; border: none; color: #fff;
+      flex: 2; background: #FF6B00; border: none; color: #fff;
       padding: 11px; border-radius: 12px;
       font-size: 14px; font-weight: 600; cursor: pointer;
       transition: background 0.15s;
     }
 
-    .btn-save:hover { background: #e0253c; }
+    .btn-save:hover { background: #e05800; }
 
     .btn-delete {
-      background: #222; border: none; color: #fe2c55;
+      background: #e4e4e4; border: none; color: #FF6B00;
       padding: 11px 14px; border-radius: 12px;
       font-size: 14px; cursor: pointer; transition: background 0.15s;
     }
 
-    .btn-delete:hover { background: #2a0a10; }
+    .btn-delete:hover { background: #fff5ee; }
 
     /* Icon type toggle */
     .icon-type-toggle {
-      display: flex; background: #0a0a0a; border-radius: 10px;
+      display: flex; background: #f2f2f2; border-radius: 10px;
       padding: 3px; margin-bottom: 10px;
     }
 
     .icon-type-btn {
-      flex: 1; background: none; border: none; color: #444;
+      flex: 1; background: none; border: none; color: #999999;
       padding: 7px; border-radius: 8px;
       font-size: 13px; font-weight: 600; cursor: pointer;
       transition: all 0.15s;
     }
 
-    .icon-type-btn.active { background: #222; color: #fff; }
+    .icon-type-btn.active { background: #e4e4e4; color: #111111; }
 
     /* Emoji grid */
     .emoji-grid { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -501,21 +541,21 @@
       width: 36px; height: 36px;
       display: flex; align-items: center; justify-content: center;
       font-size: 20px; border-radius: 8px; cursor: pointer;
-      background: #0a0a0a; border: 2px solid transparent;
+      background: #f2f2f2; border: 2px solid transparent;
       transition: border-color 0.15s;
     }
 
-    .emoji-option.selected { border-color: #fe2c55; }
-    .emoji-option:hover { border-color: #333; }
+    .emoji-option.selected { border-color: #FF6B00; }
+    .emoji-option:hover { border-color: #cccccc; }
 
     /* Image upload */
     .image-upload-area {
-      border: 2px dashed #2a2a2a; border-radius: 12px;
+      border: 2px dashed #d8d8d8; border-radius: 12px;
       padding: 20px; text-align: center; cursor: pointer;
       transition: border-color 0.15s;
     }
 
-    .image-upload-area:hover { border-color: #fe2c55; }
+    .image-upload-area:hover { border-color: #FF6B00; }
 
     .image-preview {
       width: 60px; height: 60px; border-radius: 50%;
@@ -544,9 +584,12 @@
       /* タイムライングリッド: 固定幅カラム */
       .day-headers,
       .time-slots {
-        grid-template-columns: 44px repeat(7, 130px);
+        grid-template-columns: repeat(7, 130px);
         min-width: unset;
       }
+
+      .time-axis { width: 44px; }
+      .time-axis-header { height: 54px; }
 
       /* 時間ラベル */
       .time-label { font-size: 10px; font-weight: 800; }
@@ -588,178 +631,47 @@
     .member-section { margin-bottom: 28px; }
 
     .member-section-header {
-      font-size: 13px; font-weight: 700; color: #555;
+      font-size: 13px; font-weight: 700; color: #777777;
       margin-bottom: 12px; padding-bottom: 8px;
-      border-bottom: 1px solid #222;
+      border-bottom: 1px solid #e8e8e8;
     }
 
-    /* ===== お得情報ボタン ===== */
-    #deals-fab {
-      position: absolute; top: 20px; right: 20px;
-      background: linear-gradient(135deg, #fe2c55 0%, #ff4d00 50%, #f59e0b 100%);
-      border: none; border-radius: 20px;
-      padding: 16px 18px; cursor: pointer;
-      display: flex; flex-direction: column; align-items: center; gap: 4px;
-      box-shadow: 0 0 40px rgba(254,44,85,0.5), 0 8px 32px rgba(0,0,0,0.4);
-      animation: dealsFabPulse 2s ease-in-out infinite;
-      transition: transform 0.15s;
-      overflow: hidden; min-width: 90px;
-    }
-
-    #deals-fab::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.12) 50%, transparent 100%);
-      animation: dealsShimmer 2.5s ease-in-out infinite;
-    }
-
-    @keyframes dealsShimmer {
-      0%   { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
-    }
-
-    #deals-fab:hover { transform: scale(1.02); }
-    #deals-fab:active { transform: scale(0.98); }
-
-    @keyframes dealsFabPulse {
-      0%,100% { box-shadow: 0 0 40px rgba(254,44,85,0.5), 0 8px 32px rgba(0,0,0,0.4); }
-      50%      { box-shadow: 0 0 60px rgba(254,44,85,0.8), 0 8px 40px rgba(0,0,0,0.5); }
-    }
-
-    .deals-fab-emoji { font-size: 34px; line-height: 1; }
-    .deals-fab-label {
-      font-size: 13px; font-weight: 900; color: #fff;
-      letter-spacing: 0.02em; line-height: 1;
-    }
-    .deals-fab-sub {
-      font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.75);
-      text-align: center;
-    }
-
-    .deals-fab-badge {
-      position: absolute; top: -8px; right: -8px;
-      background: #25f4ee; color: #000;
-      font-size: 12px; font-weight: 900;
-      min-width: 22px; height: 22px; border-radius: 11px;
-      padding: 0 6px;
-      display: flex; align-items: center; justify-content: center;
-    }
-
-    /* ===== お得情報ページ ===== */
-    #deals-page {
-      display: none; flex-direction: column;
-      position: fixed; inset: 0;
-      background: #000; z-index: 10;
-    }
-
-    .deals-page-header {
-      background: #111; border-bottom: 1px solid #222;
-      padding: 14px 18px; height: 68px;
-      display: flex; align-items: center; gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .deals-page-header h2 { flex: 1; font-size: 17px; font-weight: 800; color: #fff; }
-
-    .deals-page-body {
-      flex: 1; overflow-y: auto; padding: 20px;
-      display: flex; flex-direction: column; gap: 14px;
-    }
-
-    .deal-card {
-      background: #111; border: 1px solid #2a2a2a;
-      border-radius: 16px; padding: 18px;
-      position: relative;
-    }
-
-    .deal-card-title {
-      font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 8px;
-    }
-
-    .deal-card-content {
-      font-size: 14px; color: #aaa; line-height: 1.7; white-space: pre-wrap;
-    }
-
-    .deal-card-actions {
-      position: absolute; top: 12px; right: 12px;
-      display: none; gap: 6px;
-    }
-
-    .deal-card-edit {
-      background: none; border: 1px solid #333; color: #888;
-      font-size: 11px; padding: 3px 8px; border-radius: 6px;
-      cursor: pointer; transition: all 0.15s;
-    }
-
-    .deal-card-edit:hover { border-color: #f59e0b; color: #f59e0b; }
-
-    .deal-card-delete {
-      background: none; border: none; color: #333;
-      font-size: 18px; cursor: pointer;
-      transition: color 0.15s; line-height: 1;
-    }
-
-    .deal-card-delete:hover { color: #fe2c55; }
-
-    .deals-empty-state {
-      text-align: center; padding: 60px 20px; color: #333;
-      font-size: 14px;
-    }
-
-    /* お得情報追加モーダル */
-    #deals-modal-overlay {
+    /* アカウント紹介編集モーダル */
+    #intro-modal-overlay {
       display: none; position: fixed; inset: 0;
       background: rgba(0,0,0,0.8); z-index: 300;
       align-items: flex-end; justify-content: center;
     }
 
-    #deals-modal-overlay.open { display: flex; }
+    #intro-modal-overlay.open { display: flex; }
 
-    .deals-modal {
-      background: #111; border: 1px solid #2a2a2a;
+    .intro-modal {
+      background: #f8f8f8; border: 1px solid #d8d8d8;
       border-radius: 24px 24px 0 0; padding: 24px;
       width: 100%; max-width: 600px;
       padding-bottom: calc(24px + env(safe-area-inset-bottom));
     }
 
-    .deals-modal h2 { font-size: 17px; font-weight: 700; margin-bottom: 18px; color: #fff; }
+    .intro-modal h2 { font-size: 17px; font-weight: 700; margin-bottom: 18px; color: #111111; }
 
-    .deals-account-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;
+    /* テーマプリセット */
+    .theme-presets { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .theme-preset-btn {
+      background: #ebebeb; border: 1px solid #d8d8d8;
+      color: #666666; border-radius: 20px;
+      padding: 5px 12px; font-size: 12px; font-weight: 600;
+      cursor: pointer; transition: all 0.15s; white-space: nowrap;
     }
 
-    .deals-account-btn {
-      display: flex; align-items: center; gap: 10px;
-      background: #1a1a1a; border: 2px solid #2a2a2a;
-      border-radius: 12px; padding: 10px 12px;
-      cursor: pointer; transition: all 0.15s; width: 100%;
-    }
+    .theme-preset-btn:hover,
+    .theme-preset-btn.selected { background: #FF6B00; border-color: #FF6B00; color: #fff; }
 
-    .deals-account-btn:hover   { border-color: #555; }
-    .deals-account-btn.selected { border-color: #fe2c55; background: #1f0a10; }
-
-    .deals-account-btn img {
-      width: 32px; height: 32px; border-radius: 50%;
-      border: 1px solid #fff; object-fit: cover; flex-shrink: 0;
-    }
-
-    .deals-account-btn span {
-      font-size: 12px; font-weight: 700; color: #fff;
-      text-align: left; overflow: hidden;
-      text-overflow: ellipsis; white-space: nowrap;
-    }
-
-    .deal-card-account {
-      display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
-    }
-
-    .deal-card-account img {
-      width: 24px; height: 24px; border-radius: 50%;
-      border: 1px solid #333; object-fit: cover;
-    }
-
-    .deal-card-account span {
-      font-size: 11px; color: #666; font-weight: 600;
+    /* タイムラインのテーマ表示 */
+    .event-theme {
+      font-size: 12px; font-weight: 800;
+      line-height: 1.2; margin-bottom: 2px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
 
     /* ===== GO LIVE BUTTON ===== */
@@ -770,21 +682,21 @@
       padding: 13px 28px; border-radius: 40px; border: none;
       font-size: 15px; font-weight: 800; letter-spacing: 0.06em;
       cursor: pointer; transition: all 0.2s ease;
-      background: #2a2a2a; color: #555;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      background: #e8e8e8; color: #aaaaaa;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
 
     #go-live-btn.visible { display: flex; }
 
     #go-live-btn.live {
-      background: #fe2c55; color: #fff;
-      box-shadow: 0 0 24px rgba(254,44,85,0.6), 0 4px 20px rgba(0,0,0,0.4);
+      background: #FF6B00; color: #fff;
+      box-shadow: 0 0 24px rgba(255,107,0,0.6), 0 4px 20px rgba(0,0,0,0.4);
       animation: livePulse 1.8s ease-in-out infinite;
     }
 
     @keyframes livePulse {
-      0%,100% { box-shadow: 0 0 24px rgba(254,44,85,0.6), 0 4px 20px rgba(0,0,0,0.4); }
-      50%      { box-shadow: 0 0 40px rgba(254,44,85,0.9), 0 4px 20px rgba(0,0,0,0.4); }
+      0%,100% { box-shadow: 0 0 24px rgba(255,107,0,0.6), 0 4px 20px rgba(0,0,0,0.4); }
+      50%      { box-shadow: 0 0 40px rgba(255,107,0,0.9), 0 4px 20px rgba(0,0,0,0.4); }
     }
 
     #go-live-btn .live-dot {
@@ -801,14 +713,14 @@
     /* ===== PIN MODAL ===== */
     #pin-overlay {
       display: none; position: fixed; inset: 0;
-      background: #000; z-index: 500;
+      background: #ffffff; z-index: 500;
       align-items: center; justify-content: center;
     }
 
     #pin-overlay.open { display: flex; }
 
     .pin-box {
-      background: #111; border: 1px solid #2a2a2a;
+      background: #f8f8f8; border: 1px solid #d8d8d8;
       border-radius: 24px; padding: 36px 28px;
       width: 100%; max-width: 360px; margin: 20px;
       display: flex; flex-direction: column; align-items: center; gap: 20px;
@@ -819,25 +731,25 @@
       font-size: 36px; font-weight: 900; letter-spacing: -1px;
     }
 
-    .pin-logo span:first-child { color: #fe2c55; }
-    .pin-logo span:last-child  { color: #25f4ee; }
+    .pin-logo span:first-child { color: #FF6B00; }
+    .pin-logo span:last-child  { color: #111111; }
 
     .pin-title {
-      font-size: 16px; font-weight: 700; color: #fff;
+      font-size: 16px; font-weight: 700; color: #111111;
     }
 
-    .pin-subtitle { font-size: 12px; color: #555; }
+    .pin-subtitle { font-size: 12px; color: #777777; }
 
     #pin-input {
-      width: 100%; background: #0a0a0a;
-      border: 1px solid #2a2a2a; border-radius: 12px;
-      color: #fff; padding: 12px 16px; font-size: 18px;
+      width: 100%; background: #f2f2f2;
+      border: 1px solid #d8d8d8; border-radius: 12px;
+      color: #111111; padding: 12px 16px; font-size: 18px;
       outline: none; text-align: center; letter-spacing: 0.1em;
       transition: border-color 0.15s;
     }
 
-    #pin-input:focus { border-color: #fe2c55; }
-    #pin-input.error { border-color: #fe2c55; animation: shake 0.3s; }
+    #pin-input:focus { border-color: #FF6B00; }
+    #pin-input.error { border-color: #FF6B00; animation: shake 0.3s; }
 
     @keyframes shake {
       0%,100% { transform: translateX(0); }
@@ -846,25 +758,25 @@
     }
 
     .pin-btn {
-      width: 100%; background: #fe2c55; border: none; color: #fff;
+      width: 100%; background: #FF6B00; border: none; color: #fff;
       padding: 13px; border-radius: 12px;
       font-size: 15px; font-weight: 700; cursor: pointer;
       transition: background 0.15s;
     }
 
-    .pin-btn:hover { background: #e0253c; }
-    .pin-error { font-size: 12px; color: #fe2c55; min-height: 16px; }
+    .pin-btn:hover { background: #e05800; }
+    .pin-error { font-size: 12px; color: #FF6B00; min-height: 16px; }
 
     /* Sync indicator */
     #sync-badge {
       display: none;
       position: fixed; bottom: 16px; right: 16px;
-      background: #111; border: 1px solid #2a2a2a;
+      background: #f8f8f8; border: 1px solid #d8d8d8;
       border-radius: 20px; padding: 6px 12px;
-      font-size: 11px; font-weight: 600; color: #aaa;
+      font-size: 11px; font-weight: 600; color: #666666;
       gap: 6px; align-items: center;
       z-index: 300; transition: opacity 0.3s;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
     #sync-badge.visible { display: flex; }
@@ -910,46 +822,22 @@
 
 <!-- TOP PAGE -->
 <div id="top-page">
-  <h1><span>ライブ配信</span> スケジュール</h1>
+  <img src="images/header_banner.png" alt="プラスセレクト GROUP 配信アカウント紹介" style="width:100%;max-width:600px;height:auto;display:block;image-rendering:-webkit-optimize-contrast;image-rendering:crisp-edges;">
+
   <div class="account-grid" id="account-grid"></div>
-
-  <!-- お得情報ボタン -->
-  <button id="deals-fab" onclick="showDealsPage()">
-    <span class="deals-fab-emoji">🔥</span>
-    <span class="deals-fab-label">お得情報</span>
-    <span class="deals-fab-sub">TAP!</span>
-  </button>
 </div>
 
-<!-- お得情報ページ -->
-<div id="deals-page">
-  <div class="deals-page-header">
-    <button class="back-btn" onclick="hideDealsPage()">←</button>
-    <h2>🏷 お得情報</h2>
-    <button class="add-btn admin-only" onclick="openDealsModal()">+ 追加</button>
-  </div>
-  <div class="deals-page-body" id="deals-list"></div>
-</div>
-
-<!-- お得情報追加モーダル -->
-<div id="deals-modal-overlay">
-  <div class="deals-modal">
-    <h2 id="deals-modal-title">🏷 お得情報を追加</h2>
+<!-- アカウント紹介編集モーダル -->
+<div id="intro-modal-overlay">
+  <div class="intro-modal">
+    <h2 id="intro-modal-title">紹介文を編集</h2>
     <div class="form-group">
-      <label>アカウント</label>
-      <div class="deals-account-grid" id="deals-account-grid"></div>
-    </div>
-    <div class="form-group">
-      <label>タイトル</label>
-      <input type="text" id="deals-title-input" placeholder="例: 今週のセール情報">
-    </div>
-    <div class="form-group">
-      <label>内容</label>
-      <textarea id="deals-content-input" style="height:120px" placeholder="セール情報・クーポンコードなどを入力"></textarea>
+      <label>紹介文</label>
+      <textarea id="intro-text-input" style="height:120px" placeholder="アカウントの紹介文を入力してください"></textarea>
     </div>
     <div class="modal-actions">
-      <button class="btn-cancel" onclick="closeDealsModal()">キャンセル</button>
-      <button class="btn-save" onclick="saveDeals()">保存</button>
+      <button class="btn-cancel" onclick="closeIntroModal()">キャンセル</button>
+      <button class="btn-save" onclick="saveIntro()">保存</button>
     </div>
   </div>
 </div>
@@ -978,8 +866,16 @@
       <button class="week-nav-btn" onclick="changeWeek(1)">›</button>
     </div>
     <div class="timeline-container">
-      <div class="day-headers" id="day-headers"></div>
-      <div class="time-slots" id="time-slots"></div>
+      <!-- 固定時間軸 -->
+      <div class="time-axis">
+        <div class="time-axis-header"></div>
+        <div class="time-axis-body" id="time-axis-body"></div>
+      </div>
+      <!-- 横スクロールエリア -->
+      <div class="timeline-scroll" id="timeline-scroll">
+        <div class="day-headers" id="day-headers"></div>
+        <div class="time-slots" id="time-slots"></div>
+      </div>
     </div>
   </div>
 
@@ -1017,6 +913,11 @@
         <label>終了時間</label>
         <input type="time" id="f-end">
       </div>
+    </div>
+    <div class="form-group">
+      <label>テーマ（何をやるか）</label>
+      <div class="theme-presets" id="theme-presets"></div>
+      <input type="text" id="f-theme" placeholder="例: 毛蟹フラッシュセール" style="margin-top:8px">
     </div>
     <div class="form-group">
       <label>配信者（コマーサー）</label>
@@ -1090,7 +991,7 @@
     { id: 'account1', name: 'とりま〜けっと', handle: '@tori_market', url: 'https://www.tiktok.com/@tori_market', img: 'images/tori_market.jpeg', color: '#fe2c55' },
     { id: 'account2', name: '正解良品', handle: '@seikai_select', url: 'https://www.tiktok.com/@seikai_select', img: 'images/seikai_select.jpeg', color: '#25f4ee' },
     { id: 'account3', name: 'LUMINA STUDIO', handle: '@lumina_studio_', url: 'https://www.tiktok.com/@lumina_studio_', img: 'images/lumina_studio.jpeg', color: '#ff9500' },
-    { id: 'account4', name: 'るみな💎ライブコマース', handle: '@lumina_official48', url: 'https://www.tiktok.com/@lumina_official48', img: 'images/lumina_official.jpeg', color: '#af52de' },
+    { id: 'account4', name: 'るみな💎ライブコマース', displayName: 'るみな💎\nライブコマース', handle: '@lumina_official48', url: 'https://www.tiktok.com/@lumina_official48', img: 'images/lumina_official.jpeg', color: '#af52de' },
   ];
 
   // ===== STATE =====
@@ -1162,16 +1063,78 @@
     initMode();
     deduplicateMembersIfNeeded();
     importToriScheduleIfNeeded();
-    document.getElementById('account-grid').innerHTML = ACCOUNTS.map(a => `
-      <div class="account-card">
-        <button class="account-btn" onclick="selectAccount('${a.id}')">
-          <div class="avatar"><img src="${a.img}" alt="${a.name}"></div>
-          <div class="name">${a.name}</div>
-        </button>
-        <a class="tiktok-link" href="${a.url}" target="_blank" onclick="event.stopPropagation()">TikTokを開く →</a>
-      </div>
-    `).join('');
+    fetchAccountInfo();
+    renderAccountGrid();
   }
+
+  // ===== アカウント紹介 =====
+  let accountInfoData = {};
+  let editingIntroAccountId = null;
+
+  function renderAccountGrid() {
+    document.getElementById('account-grid').innerHTML = ACCOUNTS.map(a => {
+      const info = accountInfoData[a.id] || {};
+      return `
+      <div class="account-intro-card" onclick="selectAccount('${a.id}')">
+        <button class="account-intro-edit admin-only"
+          onclick="event.stopPropagation(); openIntroModal('${a.id}')">編集</button>
+        <div class="account-intro-avatar"><img src="${a.img}" alt="${a.name}"></div>
+        <div class="account-intro-name" style="white-space:pre-line">${a.displayName || a.name}</div>
+        <div class="account-intro-handle">${a.handle}</div>
+        ${info.intro ? `<div class="account-intro-text">${escHtml(info.intro)}</div>` : ''}
+        <a class="account-intro-tiktok" href="${a.url}" target="_blank"
+           onclick="event.stopPropagation()">TikTokを見る →</a>
+      </div>`;
+    }).join('');
+    // 管理モードなら編集ボタン表示
+    if (isAdminMode) {
+      document.querySelectorAll('.account-intro-edit').forEach(el => el.style.display = 'block');
+    }
+  }
+
+  async function fetchAccountInfo() {
+    try {
+      const res = await fetch('/api/account-info');
+      accountInfoData = await res.json();
+      renderAccountGrid();
+    } catch {}
+  }
+
+  function openIntroModal(accountId) {
+    editingIntroAccountId = accountId;
+    const account = ACCOUNTS.find(a => a.id === accountId);
+    document.getElementById('intro-modal-title').textContent = `${account.name} の紹介文を編集`;
+    const info = accountInfoData[accountId] || {};
+    document.getElementById('intro-text-input').value = info.intro || '';
+    document.getElementById('intro-modal-overlay').classList.add('open');
+  }
+
+  function closeIntroModal() {
+    document.getElementById('intro-modal-overlay').classList.remove('open');
+  }
+
+  async function saveIntro() {
+    const pin   = sessionStorage.getItem('adminPin') || '';
+    const intro = document.getElementById('intro-text-input').value.trim();
+    try {
+      const res = await fetch('/api/account-info', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({pin, accountId: editingIntroAccountId, intro})
+      });
+      const data = await res.json();
+      if (data.ok) {
+        if (!accountInfoData[editingIntroAccountId]) accountInfoData[editingIntroAccountId] = {};
+        accountInfoData[editingIntroAccountId].intro = intro;
+        renderAccountGrid();
+        closeIntroModal();
+      } else { alert('認証エラー'); }
+    } catch { alert('保存に失敗しました'); }
+  }
+
+  document.getElementById('intro-modal-overlay').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeIntroModal();
+  });
 
   // ===== NAVIGATION =====
   function selectAccount(id) {
@@ -1186,7 +1149,6 @@
 
     currentWeekStart = getWeekStart(new Date());
     switchTab('schedule');
-    updateGoLiveBtn();
   }
 
   function goBack() {
@@ -1202,21 +1164,21 @@
     document.getElementById('tab-streamer').classList.toggle('active', tab === 'streamer');
 
     const addBtn = document.getElementById('header-add-btn');
+    document.getElementById('schedule-view').style.display = 'none';
+    document.getElementById('streamer-view').style.display = 'none';
+    addBtn.style.display = 'none';
 
     if (tab === 'schedule') {
       document.getElementById('schedule-view').style.display = 'flex';
-      document.getElementById('streamer-view').style.display = 'none';
-      addBtn.textContent = '+ 追加';
-      addBtn.style.display = isAdminMode ? '' : 'none';
-      addBtn.onclick = () => openEventModal();
+      if (isAdminMode) { addBtn.style.display = ''; addBtn.textContent = '+ 追加'; addBtn.onclick = () => openEventModal(); }
       renderTimeline();
       scrollToCurrentTime();
+      updateGoLiveBtn(); // スケジュールタブのみLIVEボタン表示
     } else {
-      document.getElementById('schedule-view').style.display = 'none';
       document.getElementById('streamer-view').style.display = 'block';
-      addBtn.style.display = 'none';
       renderStreamerGrid();
       renderModeratorGrid();
+      document.getElementById('go-live-btn').classList.remove('visible', 'live');
     }
   }
 
@@ -1265,7 +1227,34 @@
     });
   }
 
-  const HOUR_H = 80; // 1時間あたりのピクセル高さ
+  const HOUR_H = 80;
+
+  const THEME_PRESETS = [
+    '🔥 フラッシュセール',
+    '⏰ タイムセール',
+    '🆕 新商品紹介',
+    '💎 プレミアム',
+    '🎁 特典あり',
+    '📦 まとめ売り',
+    '🦀 海鮮セール',
+    '👗 ファッション',
+    '💄 コスメ',
+    '🍱 食品',
+  ];
+
+  function renderThemePresets() {
+    const current = document.getElementById('f-theme').value;
+    document.getElementById('theme-presets').innerHTML = THEME_PRESETS.map(t => `
+      <button type="button" class="theme-preset-btn${current === t ? ' selected' : ''}"
+        onclick="selectThemePreset('${t}')">${t}</button>
+    `).join('');
+  }
+
+  function selectThemePreset(t) {
+    const input = document.getElementById('f-theme');
+    input.value = input.value === t ? '' : t;
+    renderThemePresets();
+  }
 
   function renderTimeline() {
     const days = Array.from({length: 7}, (_, i) => {
@@ -1282,7 +1271,6 @@
     const today = new Date(); today.setHours(0,0,0,0);
 
     document.getElementById('day-headers').innerHTML =
-      '<div class="day-header-empty"></div>' +
       days.map((d, i) => {
         const isToday = d.getTime() === today.getTime();
         const isSat = i === 5, isSun = i === 6;
@@ -1297,12 +1285,17 @@
     const events = scheduleData[currentAccount.id] || [];
     const MAJOR = new Set([0, 6, 12, 18]);
 
-    // 時間ラベル列
-    let html = '<div class="time-col">' +
-      hours.map(h => `<div class="time-label${MAJOR.has(h) ? ' major' : ''}">${String(h).padStart(2,'0')}:00</div>`).join('') +
-      '</div>';
+    // 時間軸（固定左列）
+    document.getElementById('time-axis-body').innerHTML =
+      hours.map(h => `<div class="time-label${MAJOR.has(h) ? ' major' : ''}">${String(h).padStart(2,'0')}:00</div>`).join('');
+
+    // スクロール同期（縦のみ）
+    const scroll = document.getElementById('timeline-scroll');
+    const axisBody = document.getElementById('time-axis-body');
+    scroll.onscroll = () => { axisBody.scrollTop = scroll.scrollTop; };
 
     // 各曜日列
+    let html = '';
     days.forEach((d, i) => {
       const isToday = d.getTime() === today.getTime();
       const isSat = i === 5, isSun = i === 6;
@@ -1381,8 +1374,9 @@
       style="top:${top}px;height:${height}px;background:${bg};color:${fg}"
       onclick="if(isAdminMode) openEventModal('${ev.id}')">
       ${compact
-        ? `<div class="event-title" style="font-size:9px">${escHtml(ev.title)}</div>`
+        ? `<div class="event-title" style="font-size:9px">${escHtml(ev.theme || ev.title)}</div>`
         : `<div class="event-time-label">${ev.start}〜${ev.end}</div>
+           ${ev.theme ? `<div class="event-theme">${escHtml(ev.theme)}</div>` : ''}
            <div class="event-title">${escHtml(ev.title)}</div>
            ${membersHTML}`
       }
@@ -1431,9 +1425,10 @@
       document.getElementById('f-date').value = ev.date;
       document.getElementById('f-start').value = ev.start;
       document.getElementById('f-end').value = ev.end;
-      document.getElementById('f-memo').value = ev.memo || '';
-      selectedEventColor = ev.color || COLORS[0];
-      selectedStreamerIds = ev.streamerIds ? [...ev.streamerIds] : [];
+      document.getElementById('f-memo').value   = ev.memo  || '';
+      document.getElementById('f-theme').value  = ev.theme || '';
+      selectedEventColor   = ev.color        || COLORS[0];
+      selectedStreamerIds   = ev.streamerIds  ? [...ev.streamerIds]  : [];
       selectedModeratorIds = ev.moderatorIds ? [...ev.moderatorIds] : [];
       document.getElementById('event-modal-actions').innerHTML = `
         <button class="btn-delete" onclick="deleteEvent('${id}')">削除</button>
@@ -1445,7 +1440,8 @@
       document.getElementById('f-date').value = dateToStr(new Date());
       document.getElementById('f-start').value = '20:00';
       document.getElementById('f-end').value = '22:00';
-      document.getElementById('f-memo').value = '';
+      document.getElementById('f-memo').value  = '';
+      document.getElementById('f-theme').value = '';
       selectedEventColor = COLORS[0];
       document.getElementById('event-modal-actions').innerHTML = `
         <button class="btn-cancel" onclick="closeEventModal()">キャンセル</button>
@@ -1455,6 +1451,7 @@
     renderEventColorPicker();
     renderStreamerSelector();
     renderModeratorSelector();
+    renderThemePresets();
     document.getElementById('event-modal-overlay').classList.add('open');
   }
 
@@ -1525,13 +1522,14 @@
     const date = document.getElementById('f-date').value;
     const start = document.getElementById('f-start').value;
     const end = document.getElementById('f-end').value;
-    const memo = document.getElementById('f-memo').value.trim();
+    const memo  = document.getElementById('f-memo').value.trim();
+    const theme = document.getElementById('f-theme').value.trim();
 
     if (!title || !date || !start || !end) { alert('タイトル・日付・時間を入力してください'); return; }
 
     if (!scheduleData[currentAccount.id]) scheduleData[currentAccount.id] = [];
 
-    const evData = { title, date, start, end, memo, color: selectedEventColor, streamerIds: [...selectedStreamerIds], moderatorIds: [...selectedModeratorIds] };
+    const evData = { title, date, start, end, memo, theme, color: selectedEventColor, streamerIds: [...selectedStreamerIds], moderatorIds: [...selectedModeratorIds] };
 
     if (editingEventId) {
       const idx = scheduleData[currentAccount.id].findIndex(e => e.id === editingEventId);
@@ -1702,9 +1700,12 @@
 
   function setAdminMode(enabled) {
     isAdminMode = enabled;
-    // 管理専用UI の表示切り替え
     document.querySelectorAll('.admin-only').forEach(el => {
       el.style.display = enabled ? '' : 'none';
+    });
+    // アカウント紹介の編集ボタン
+    document.querySelectorAll('.account-intro-edit').forEach(el => {
+      el.style.display = enabled ? 'block' : 'none';
     });
   }
 
@@ -1755,7 +1756,7 @@
   }
 
   // ===== サーバー同期 =====
-  const SYNC_API   = 'http://localhost:8765/api/schedule';
+  const SYNC_API   = '/api/schedule';
   const EV_PREFIXES = { account1:'ev_tori_', account2:'ev_seikai_', account3:'ev_lumina_' };
   let lastSyncHash = null;
 
@@ -1781,7 +1782,11 @@
     const schedule = JSON.parse(localStorage.getItem('liveSchedule') || '{}');
     for (const [accountId, prefix] of Object.entries(EV_PREFIXES)) {
       const imported = (data.accounts?.[accountId] || []);
-      const manual   = (schedule[accountId] || []).filter(e => !e.id.startsWith(prefix));
+      // 既存イベントのテーマを保持
+      const themeMap = {};
+      (schedule[accountId] || []).forEach(e => { if (e.theme) themeMap[e.id] = e.theme; });
+      imported.forEach(ev => { if (themeMap[ev.id]) ev.theme = themeMap[ev.id]; });
+      const manual = (schedule[accountId] || []).filter(e => !e.id.startsWith(prefix));
       schedule[accountId] = [...imported, ...manual];
     }
     localStorage.setItem('liveSchedule', JSON.stringify(schedule));
@@ -1866,148 +1871,6 @@
 
   // 1分ごとにライブ状態を更新
   setInterval(updateGoLiveBtn, 60000);
-
-  // ===== お得情報 =====
-  let dealsData = [];
-
-  function renderDealsPage() {
-    const list = document.getElementById('deals-list');
-    if (!dealsData.length) {
-      list.innerHTML = '<div class="deals-empty-state">現在お得情報はありません</div>';
-      return;
-    }
-    list.innerHTML = dealsData.map(d => {
-      const acc = ACCOUNTS.find(a => a.id === d.account);
-      return `
-      <div class="deal-card">
-        <div class="deal-card-actions admin-only">
-          <button class="deal-card-edit" onclick="openEditDealModal('${d.id}')">編集</button>
-          <button class="deal-card-delete" onclick="deleteDeal('${d.id}')">✕</button>
-        </div>
-        ${acc ? `<div class="deal-card-account">
-          <img src="${acc.img}" alt="${acc.name}">
-          <span>${acc.name}</span>
-        </div>` : ''}
-        <div class="deal-card-title">${escHtml(d.title)}</div>
-        <div class="deal-card-content">${escHtml(d.content)}</div>
-      </div>`;
-    }).join('');
-    if (isAdminMode) {
-      document.querySelectorAll('.deal-card-actions').forEach(el => el.style.display = 'flex');
-    }
-  }
-
-  function updateDealsBadge() {}
-
-  async function fetchDeals() {
-    try {
-      const res = await fetch('/api/deals', {cache: 'no-store'});
-      dealsData = await res.json();
-      updateDealsBadge();
-    } catch {}
-  }
-
-  function showDealsPage() {
-    document.getElementById('top-page').style.display   = 'none';
-    document.getElementById('deals-page').style.display = 'flex';
-    renderDealsPage();
-  }
-
-  function hideDealsPage() {
-    document.getElementById('deals-page').style.display = 'none';
-    document.getElementById('top-page').style.display   = 'flex';
-  }
-
-  let selectedDealAccount = null;
-  let editingDealId = null;
-
-  function renderDealsAccountGrid() {
-    document.getElementById('deals-account-grid').innerHTML = ACCOUNTS.map(a => `
-      <button class="deals-account-btn${selectedDealAccount === a.id ? ' selected' : ''}"
-              onclick="selectDealAccount('${a.id}')">
-        <img src="${a.img}" alt="${a.name}">
-        <span>${a.name}</span>
-      </button>
-    `).join('');
-  }
-
-  function selectDealAccount(id) {
-    selectedDealAccount = id;
-    renderDealsAccountGrid();
-  }
-
-  function openDealsModal() {
-    editingDealId = null;
-    selectedDealAccount = null;
-    document.getElementById('deals-modal-title').textContent = '🏷 お得情報を追加';
-    document.getElementById('deals-title-input').value   = '';
-    document.getElementById('deals-content-input').value = '';
-    renderDealsAccountGrid();
-    document.getElementById('deals-modal-overlay').classList.add('open');
-  }
-
-  function openEditDealModal(id) {
-    const deal = dealsData.find(d => d.id === id);
-    if (!deal) return;
-    editingDealId = id;
-    selectedDealAccount = deal.account || null;
-    document.getElementById('deals-modal-title').textContent = '🏷 お得情報を編集';
-    document.getElementById('deals-title-input').value   = deal.title   || '';
-    document.getElementById('deals-content-input').value = deal.content || '';
-    renderDealsAccountGrid();
-    document.getElementById('deals-modal-overlay').classList.add('open');
-  }
-
-  function closeDealsModal() {
-    document.getElementById('deals-modal-overlay').classList.remove('open');
-  }
-
-  async function saveDeals() {
-    const pin     = sessionStorage.getItem('adminPin') || '';
-    const title   = document.getElementById('deals-title-input').value.trim();
-    const content = document.getElementById('deals-content-input').value.trim();
-    if (!selectedDealAccount) { alert('アカウントを選択してください'); return; }
-    if (!title) { alert('タイトルを入力してください'); return; }
-    const account = selectedDealAccount;
-    const action  = editingDealId ? 'update' : 'add';
-    const body2   = {pin, action, title, content, account};
-    if (editingDealId) body2.id = editingDealId;
-    try {
-      const res = await fetch('/api/deals', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(body2)
-      });
-      const data = await res.json();
-      if (data.ok) {
-        await fetchDeals();
-        renderDealsPage();
-        closeDealsModal();
-      } else { alert('認証エラー'); }
-    } catch { alert('保存に失敗しました'); }
-  }
-
-  async function deleteDeal(id) {
-    if (!confirm('この情報を削除しますか？')) return;
-    const pin = sessionStorage.getItem('adminPin') || '';
-    try {
-      const res = await fetch('/api/deals', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({pin, action: 'delete', id})
-      });
-      const data = await res.json();
-      if (data.ok) { await fetchDeals(); renderDealsPage(); }
-    } catch {}
-  }
-
-  document.getElementById('deals-modal-overlay').addEventListener('click', e => {
-    if (e.target === e.currentTarget) closeDealsModal();
-  });
-
-  // 初回ロード
-  fetchDeals();
-  setInterval(fetchDeals, 60000);
 
   init();
 </script>
